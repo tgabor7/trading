@@ -1,12 +1,26 @@
 version: '3.8'
 
 services:
+
+  nginx:
+    image: nginx:latest
+    command: /src/services/wait-for-it.sh frontend:3000 -- bash -c
+      "/src/services/wait-for-it.sh backend:3000 && sleep 3 && nginx -g 'daemon
+      off;'"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:rw -
+      - ./scripts/:/src/services
+    ports:
+      - "80:80"
+    restart: on-failure
+    depends_on:
+      - backend
+      - frontend
+
   frontend:
     build: ./services/frontend
     volumes:
       - ./services/frontend/src:/app/src:rw
-    ports:
-      - 3001:3000
     depends_on:
       - backend
 
@@ -18,5 +32,3 @@ services:
       - PORT=3000
       - FLASK_ENV=development
       - FLASK_APP=app.py
-    ports:
-      - 3000:5000
