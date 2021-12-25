@@ -1,0 +1,28 @@
+.chart-header-button {
+    background-color: #555;
+    color: #ffe;
+    padding: 10px;
+    border-radius: 0;
+}
+.chart-header-button:hover {
+    outline: 1px solid transparent;
+    cursor: pointer;
+    -webkit-font-smoothin: antialiased;
+    transform: translate3d(0,0,0) rotateZ(2deg);
+}
+.selected {
+    background-color: #ffe;
+    color: black;
+    border: 1px solid #555;
+}
+.chart-header-button:nth-of-type(1) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.chart-header-button:nth-of-type(3) {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.side-menu {
+    margin-left: auto;   
+}

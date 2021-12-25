@@ -6,6 +6,7 @@ import { getDates, getOpen, parseTimeseries } from './utils/data';
 import Chart from './components/Chart';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import MainPage from './pages/MainPage';
 
 function App() {
 
@@ -22,11 +23,12 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div className="App">
+      {/* <div className="App">
         <div className="chart-container">
           <Chart data={data} labels={labels}></Chart>
         </div>
-      </div>
+      </div> */}
+      <MainPage />
     </Provider>
 
   );

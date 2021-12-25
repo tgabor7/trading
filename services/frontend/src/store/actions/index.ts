@@ -1,9 +1,19 @@
 import { Timeseries } from "../../data/types";
 import { ActionType } from "../action-types";
 
-interface SetAction {
+interface SetTimeSeriesAction {
     type: ActionType.SET;
-    payload: Timeseries[]
+    payload: Timeseries
 }
 
-export type Action = SetAction
+interface SetSymbolAction {
+    type: ActionType.SETSYMBOL;
+    payload: string
+}
+
+interface SetTimeFunction {
+    type: ActionType.SETTIMEFUNCTION,
+    payload: string
+}
+
+export type Action = SetTimeSeriesAction | SetSymbolAction | SetTimeFunction;

@@ -27,11 +27,6 @@
 .App-link {
   color: #61dafb;
 }
-.chart-container {
-  margin: auto;
-  width: 500px;
-  height: 500px;
-}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
