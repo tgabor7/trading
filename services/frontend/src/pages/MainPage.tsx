@@ -1,11 +1,12 @@
 import "bulma/css/bulma.css";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Chart from "../components/Chart";
 import ChartHeader from "../components/ChartHeader";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SideMenu from "../components/SideMenu";
+import ErrorContext from "../error";
 import { State } from "../store/reducers";
 import { getDates, getValues } from "../utils/data";
 import "./styles.css"

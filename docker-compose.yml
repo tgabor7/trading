@@ -28,6 +28,7 @@ services:
     build: ./services/backend
     volumes:
       - ./services/backend:/app/src:rw
+      - ./services/backend/logs:/app/src/logs:rw
     environment:
       - PORT=3000
       - FLASK_ENV=development

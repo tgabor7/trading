@@ -1,0 +1,1 @@
+export const TOO_MANY_API_CALLS = "Too many API calls, please wait a minute before making any more requests!";
