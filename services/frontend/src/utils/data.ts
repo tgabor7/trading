@@ -18,7 +18,7 @@ export const parseExchangeRate = (data: any): ExchangeRateData | undefined => {
 export const parseCurrencyList = (data: any) : Currency[] | undefined => {
     const response = data["response"];
 
-    const result = String(response).split("\r\n").map(e=>{
+    const result = String(response).split("\r\n").slice(1).map(e=>{
         const [symbol, name] = e.split(",");
         return {
             symbol,

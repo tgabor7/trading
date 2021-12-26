@@ -52,3 +52,27 @@
     margin-left: 5px;
     margin-right: 10px;
 }
+.dropdown-content {
+    height: 500px;
+    overflow-y: auto;
+}
+.dropdown-search {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+    display: flex;
+}
+.dropdown-search .icon {
+    margin: auto;
+    position: absolute;
+    right: 20px;
+    top: 30%;
+}
+.dropdown-search .icon:hover {
+    cursor: pointer;
+}
+.dropdown-search input {
+    font-size: large;
+    text-align: center;
+    padding: 5px;
+}

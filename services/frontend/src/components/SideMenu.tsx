@@ -6,6 +6,7 @@ import { getCurrencyList } from "../api/CurrencyList";
 import { ActionCreators } from "../store";
 import { State } from "../store/reducers";
 import { parseCurrencyList, parseExchangeRate } from "../utils/data";
+import CurrencyList from "./CurrencyList";
 
 
 const SideMenu = (): JSX.Element => {
@@ -38,29 +39,11 @@ const SideMenu = (): JSX.Element => {
             parseCurrencyList(res);
             setSymbols(parseCurrencyList(res)?.map(e => e.symbol));
         })
-    }, [])
+    }, [symbol])
 
     return (<>
         <div className="side-menu">
-            <div className={`dropdown ${open ? "is-active" : ""}`}>
-                <div className="dropdown-trigger">
-                    <button className="button" aria-haspopup="true" aria-controls="dropdown-menu" onClick={() => {
-                        setOpen(!open);
-                    }}>
-                        <span>{selected}</span>
-                        <span className="icon is-small">
-                            <i className="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-                <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div className="dropdown-content">
-                        {symbols?.map((e, index) => <div key={index} className="dropdown-item" onClick={() => {
-                            handleSelect(e);
-                        }}>{e}</div>)}
-                    </div>
-                </div>
-            </div>
+            <CurrencyList selected={selected} setOpen={setOpen} handleSelect={handleSelect} open={open} symbols={symbols} />
             <div>
                 <h2>{time_series.name}</h2>
                 <p>{time_series.description}</p>
