@@ -15,13 +15,13 @@ const ChartHeader = (): JSX.Element => {
         <div className="flex">
             <div className={`chart-header-button ${selected === 0 ? "selected" : ""}`} onClick={()=>{
                 setSelected(0);
-                setTimeFunction("DIGITAL_CURRENCY_DAILY");
+                setTimeFunction("DIGITAL_CURRENCY_MONTHLY");
             }}>
                 Monthly
             </div>
             <div className={`chart-header-button ${selected === 1 ? "selected" : ""}`} onClick={()=>{
                 setSelected(1);
-                setTimeFunction("DIGITAL_CURRENCY_MONTHLY");
+                setTimeFunction("DIGITAL_CURRENCY_DAILY");
             }}>
                 Daily
             </div>

@@ -1,0 +1,27 @@
+version: 0.2
+phases:
+  install:
+    runtime-version:
+      docker: 18
+  pre-build:
+    commands:
+      - echo Build client and backend docker images for testing...
+      - docker build -t tgabor7/react-test -f ./services/frontend/Dockerfile.dev ./services/frontend
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Run react tests...
+      - docker run -e CI=true tgabor7/react-test
+      - echo Building the production docker image...
+      - docker build -t tgabor7/crypto-app-frontend ./services/frontend
+      - docker build -t tgabor7/crypto-app-backend ./services/backend
+      - docker build -t tgabor7/crypto-app-nginx ./services/nginx
+      - echo "$DOCKER_PW" | docker login -u "$DOCKER_ID" --password-stdin
+
+  post_buid:
+    commmands:
+      - echo Pushing the Docker images...
+      - docker push tgabor7/crypto-app-frontend
+      - docker push tgabor7/crypto-app-backend
+      - docker push tgabor7/crypto-app-nginx

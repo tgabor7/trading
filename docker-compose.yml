@@ -4,9 +4,6 @@ services:
 
   nginx:
     image: nginx:latest
-    command: /src/services/wait-for-it.sh frontend:3000 -- bash -c
-      "/src/services/wait-for-it.sh backend:3000 && sleep 3 && nginx -g 'daemon
-      off;'"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:rw -
       - ./scripts/:/src/services
@@ -30,6 +27,6 @@ services:
       - ./services/backend:/app/src:rw
       - ./services/backend/logs:/app/src/logs:rw
     environment:
-      - PORT=3000
+      - PORT=3001
       - FLASK_ENV=development
       - FLASK_APP=app.py
