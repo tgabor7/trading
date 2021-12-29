@@ -55,4 +55,4 @@ jobs:
        application_name: crypto-app
        environment_name: Cryptoapp-env
        version_label: "app-9695-211229_213027"
-       region: us-east-1
+       region: us-east-2
