@@ -1,39 +1,58 @@
-name: Test & Deploy
+# This is a basic workflow to help you get started with Actions
+
+name: Push images to Dockerhub and deploy on ELastic Beanstalk
+
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
-  test-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Latest Repo
-        uses: actions/checkout@master
+ build_docker_images:
+  name: build docker images
+  runs-on: [ubuntu-latest]
+  steps:
+   - name: checkout
+     uses: actions/checkout@v2
+   - name: Docker Login
+     uses: docker/login-action@v1.8.0
+     with:
+      username: ${{secrets.DOCKERHUB_USERNAME}}
+      password: ${{secrets.DOCKERHUB_TOKEN}}
+      logout: true
+   - name: Build Backend image
+     run: docker build -t tgabor7/crypto-app-backend -f ./services/backend/Dockerfile ./services/backend
+   - name: Tag our Image
+     run: docker tag tgabor7/crypto-app-backend tgabor7/crypto-app-backend:latest
+   - name: Push to dockerhub
+     run: docker push tgabor7/crypto-app-backend
+     
+   - name: Build Frontend image
+     run: docker build -t tgabor7/crypto-app-frontend -f ./services/frontend/Dockerfile ./services/frontend
+   - name: Tag our Image
+     run: docker tag tgabor7/crypto-app-frontend tgabor7/crypto-app-frontend:latest
+   - name: Push to dockerhub
+     run: docker push tgabor7/crypto-app-frontend
+     
+   - name: Build Nginx image
+     run: docker build -t tgabor7/crypto-app-nginx -f ./services/nginx/Dockerfile ./services/nginx
+   - name: Tag our Image
+     run: docker tag tgabor7/crypto-app-nginx tgabor7/crypto-app-nginx:latest
+   - name: Push to dockerhub
+     run: docker push tgabor7/crypto-app-nginx
 
-      # Zip Dockerfile for upload
-      - name: Generate Deployment Package
-        run: zip -r deploy.zip * -x "**node_modules**"
-        
-      - name: Get timestamp
-        uses: gerred/actions/current-time@master
-        id: current-time
-
-      - name: Run string replace
-        uses: frabert/replace-string-action@master
-        id: format-time
-        with:
-          pattern: '[:\.]+'
-          string: "${{ steps.current-time.outputs.time }}"
-          replace-with: '-'
-          flags: 'g'
-
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v14
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: crypto-app
-          environment_name: Cryptoapp-env-1
-          version_label: "crypto-app-deployment-${{ steps.format-time.outputs.replaced }}"
-          region: us-east-2
-          deployment_package: deploy.zip
+   - name: Deploy to EB
+     uses: einaregilsson/beanstalk-deploy@v14
+     with:
+       aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+       aws_secret_key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+       application_name: crypto-app
+       environment_name: Cryptoapp-env
+       version_label: "app-9695-211229_213027"
+       region: us-east-1
