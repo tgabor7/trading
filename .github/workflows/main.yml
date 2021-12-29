@@ -2,7 +2,7 @@ name: Test & Deploy
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   test-and-deploy:
     runs-on: ubuntu-latest
@@ -32,8 +32,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: beanstalk-engineer-v2
-          environment_name: BeanstalkEngineerV2-env
-          version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
+          application_name: crypto-app
+          environment_name: Cryptoapp-env
+          version_label: "crypto-app-deployment-${{ steps.format-time.outputs.replaced }}"
           region: us-east-2
           deployment_package: deploy.zip
