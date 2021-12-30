@@ -32,7 +32,6 @@ export const parseCurrencyList = (data: any) : Currency[] | undefined => {
 export const parseTimeseries = (data: any, timeFunction?: Time): Timeseries | undefined => {
     const response = data["response"];
     if (Object.keys(response)[0] === "Note" || Object.keys(response)[0] === "Error Message") {
-        console.log(response);
 
         return undefined;
     }

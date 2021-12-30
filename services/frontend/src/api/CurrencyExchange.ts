@@ -8,7 +8,6 @@ interface ApiProps {
 
 export const getExchangeRate = (apiProps: ApiProps) => {
     const url = `${API_ENDPOINT}/exchange_rate/?symbol=${apiProps.symbol}`;
-    console.log(url);
     
     return new Promise((resolve, reject) => {
         axios.get(url).then(res => {
