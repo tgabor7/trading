@@ -1,1 +1,1 @@
-export const API_ENDPOINT = "http://localhost/api/"
+export const API_ENDPOINT = "http://cryptoapp-env.eba-jwzrss8c.us-east-2.elasticbeanstalk.com/api/"
