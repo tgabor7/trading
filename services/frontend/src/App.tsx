@@ -6,6 +6,7 @@ import MainPage from './pages/MainPage';
 import ErrorContext from './error';
 import { ErrorMessage, ErrorSeverity } from './error/types';
 import ErrorModal from './components/ErrorModal';
+import SignupPage from './pages/SignupPage';
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
         </div>
       </div> */}
       <ErrorModal />
-        <MainPage />
+        {/* <MainPage /> */}
+        <SignupPage />
       </Provider>
     </ErrorContext.Provider>
 
