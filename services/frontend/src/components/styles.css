@@ -8,7 +8,6 @@
     outline: 1px solid transparent;
     cursor: pointer;
     -webkit-font-smoothin: antialiased;
-    transform: translate3d(0,0,0) rotateZ(2deg);
 }
 .selected {
     background-color: #ffe;

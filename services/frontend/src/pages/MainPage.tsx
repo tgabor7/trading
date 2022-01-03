@@ -16,8 +16,6 @@ const MainPage = (): JSX.Element => {
     const timeSeries = useSelector((state: State) => state.timeSeries);
 
     return (<>
-        <Navbar />
-
         <div>
 
         </div>

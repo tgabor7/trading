@@ -1,6 +1,5 @@
 import "bulma/css/bulma.css";
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 import "./styles.css"
 
 const SignupPage = (): JSX.Element => {
@@ -25,7 +24,6 @@ const SignupPage = (): JSX.Element => {
     }
 
     return (<>
-        <Navbar />
         <div className="card signup-card">
             <header className="card-header">
                 <p className="header">
@@ -53,6 +51,10 @@ const SignupPage = (): JSX.Element => {
                     <span className="flex">
                         <input type="checkbox" />
                         <p className="p">I accept the <a href="https://google.com">{"Terms & Conditions"}</a></p>
+                    </span>
+                    <span className="flex">
+                        <input type="checkbox" />
+                        <p className="p">I acknowledge that my information will be usedin accordance with the <a href="https://google.com">{"Privacy policy"}</a> and <a href="https://google.com">Cookie policy</a></p>
                     </span>
                     <input className="signup-button" type="button" value={"Sign up"} />
                 </div>

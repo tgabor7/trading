@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Navbar = (): JSX.Element => {
     return (<>
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="https://bulma.io">
-                    <p>Logo here</p>
-                </a>
+                <p>Logo here</p>
 
                 <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
@@ -15,9 +15,9 @@ const Navbar = (): JSX.Element => {
 
             <div id="navbarBasicExample" className="navbar-menu">
                 <div className="navbar-start">
-                    <a className="navbar-item">
+                    <Link to='/' className="navbar-item">
                         Home
-                    </a>
+                    </Link>
                     <a className="navbar-item">
                         Documentation
                     </a>
@@ -46,12 +46,9 @@ const Navbar = (): JSX.Element => {
                 <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="buttons">
-                            <a className="button is-primary">
-                                <strong>Sign up</strong>
-                            </a>
-                            <a className="button is-light">
-                                Log in
-                            </a>
+
+                            <Link className="button is-primary" to='/register'>Sign up</Link>
+                            <Link className="button is-light" to='/login'>Log in</Link>
                         </div>
                     </div>
                 </div>

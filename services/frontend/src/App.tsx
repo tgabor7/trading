@@ -7,26 +7,33 @@ import ErrorContext from './error';
 import { ErrorMessage, ErrorSeverity } from './error/types';
 import ErrorModal from './components/ErrorModal';
 import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LoginPage';
+import Navbar from './components/Navbar';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { APOLLO_ENDPOINT } from './config/config';
+import { AuthProvider } from './auth/AuthProvider'
 
 function App() {
 
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>({severity: ErrorSeverity.INFO, message: ""});
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>({ severity: ErrorSeverity.INFO, message: "" });
 
   return (
-    <ErrorContext.Provider value={{errorMessage: errorMessage, setErrorMessage: setErrorMessage}}>
-      <Provider store={store}>
-        {/* <div className="App">
-        <div className="chart-container">
-          <Chart data={data} labels={labels}></Chart>
-        </div>
-      </div> */}
-      <ErrorModal />
-        {/* <MainPage /> */}
-        <SignupPage />
-      </Provider>
-    </ErrorContext.Provider>
-
-
+    <AuthProvider>
+      <ErrorContext.Provider value={{ errorMessage: errorMessage, setErrorMessage: setErrorMessage }}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<MainPage />} />
+              <Route path='login' element={<LoginPage />} />
+              <Route path='register' element={<SignupPage />} />
+            </Routes>
+          </BrowserRouter>
+          <ErrorModal />
+        </Provider>
+      </ErrorContext.Provider>
+    </AuthProvider>
   );
 }
 
