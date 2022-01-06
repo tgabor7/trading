@@ -2,11 +2,11 @@ import { createContext, useReducer } from "react"
 
 const AuthContext = createContext({
     user: null,
-    login: (userData) => { },
+    login: (userData: any) => { },
     logout: () => { }
 })
 
-const authReducer = (state, action) => {
+const authReducer = (state: any, action: any) => {
     switch (action.type) {
         case 'LOGIN':
             return {
@@ -27,7 +27,7 @@ const AuthProvider = (props: any) => {
 
     const [state, dispatch] = useReducer(authReducer, { user: null })
 
-    const login = (userData) => {
+    const login = (userData: any) => {
         dispatch({
             type: 'LOGIN',
             payload: userData
@@ -39,7 +39,7 @@ const AuthProvider = (props: any) => {
             type: 'LOGOUT'
         })
     }
-        return (<AuthContext.Provider value={{ user: state.user, login, logout }} {...props} />)
+    return (<AuthContext.Provider value={{ user: state.user, login, logout }} {...props} />)
 }
 
-export {AuthProvider, AuthContext}
+export { AuthProvider, AuthContext }
